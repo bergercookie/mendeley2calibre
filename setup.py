@@ -23,11 +23,14 @@ setup(name=PKG_NAME,
       maintainer_email='nickkouk@gmail.com',
       license='BSD 3-clause',
       install_requires=(
-          "mendeley",
+          "lmendeley",
+          "argparse"
       ),
       url='https://github.org/bergercookie/calibration_automaton',
       download_url='https://github.org/bergercookie/calibration_automaton',
+      dependency_links=["https://github.com/bergercookie/pymendeley", ],
       scripts=['vmendeley2calibre.py', ],
+      packages=[PKG_NAME, ],
       platforms="Linux",
       )
 
