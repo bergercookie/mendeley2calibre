@@ -7,6 +7,11 @@ from typing import List
 import urllib.request
 from copy import deepcopy
 
+import logging
+from .clogger import setup_logging
+
+logger = logging.getLogger(__file__)
+setup_logging(__file__)
 
 class CalibreReference(GenericReference):
     """Simple class to hold a Calibre document's reference data.
@@ -51,20 +56,22 @@ class CalibreReference(GenericReference):
     def __init__(self, *args, **kargs):
         GenericReference.__init__(self, *args, **kargs)
 
-    def write_to_db(self, library_path: str) -> None:
+
+    def write_to_db(self, library_path: str) -> bool:
         """Write the current instance to the Calibre db.
 
         Current tool constitutes a thin wrapper around the calibredb command
 
         :param library_path: Path to the toplevel calibre library that is to be
                              used
+        :returns True if operation was successful
         """
 
-        def interact_with_lib(*calibre_db_args):
+        def interact_with_lib(*calibre_db_args) -> sh.RunningCommand:
             """Interact with the calibre library"""
             args = list(deepcopy(calibre_db_args))
             args.append("--with-library={}".format(library_path))
-            sh.calibredb(args)
+            return sh.calibredb(args)
 
 
         # Add the new book, then search and grab its ID - Use the latter to set
@@ -80,9 +87,22 @@ class CalibreReference(GenericReference):
 
         interact_with_lib("add", self._temp_res_dir,
                           "--title", self.params["title"])
-        interact_with_lib("search", self.params["title"])
-        print("add_ret: ", add_ret)
-        print("search_ret: ", search_ret)
+
+        # deal with bug in cli parsing of calibre - escape parens
+        calibr_id = interact_with_lib("search", "title:\"{}\"".format(self.params["title"].replace('(', '\\(').replace(')', '\\)')))
+
+
+        if not calibr_id:
+            logger.warn("Failed to write book to library: {}".format(self))
+            return False
+
+        args = []
+        for key, val in self.params.items():
+            if val:
+                args.extend(["--field", "{}:\"{}\"".format(key, val)])
+
+        interact_with_lib("set_metadata", int(calibr_id), *args)
+        return True
 
 
         # TODO: Insert a book in calibre - how to manage the fields?

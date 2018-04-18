@@ -65,6 +65,7 @@ def convert_mendeley_to_calibre_ref(mendeley_ref: MendeleyReference) \
     for m_param, c_param in props_correspondences.items():
         calib_ref.params[c_param] = mendeley_ref.params[m_param]
 
+    # TODO - copy the mendeley tags as well
     # add the rest of mendeley properties in the calibre "tags"
     calib_ref.params["tags"] = mendeley_ref.params["type"]
 
