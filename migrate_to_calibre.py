@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 
 import argparse
-from mendeley import Mendeley
-from mendeley.session import MendeleySession
 import logging
-from calibre2mendeley.clogger import setup_logging
+from mendeley2calibre.clogger import setup_logging
 
 # setup logging
 logger = logging.getLogger(__file__)
 setup_logging(logger)
+
+logger.info("Initialising conversion procedure: Mendeley -> Calibre...")
 
 # Parse cmdline args
 
