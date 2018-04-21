@@ -43,14 +43,15 @@ A developer can also generate the `Sphinx` documentation for `mendeley2calibre` 
 
 - Install the related tools:
 
-    ```sh
-    apt-get install sphinx sphinx_rtd_theme
-    ```
+  ```sh
+  apt-get install sphinx sphinx_rtd_theme
+  ```
 - To update the documentation run `make html` inside the `docs` directory.
     Open the build/html/index.html file to view the results
 
-        #!sh
-        firefox docs/build/html/index.html
+  ```sh
+  firefox docs/build/html/index.html
+  ```
 
 
 ## Roadmap
