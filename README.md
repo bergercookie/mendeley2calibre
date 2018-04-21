@@ -41,6 +41,6 @@ Migrate the mendeley db using the mendeley2calibre script
 
 ## Roadmap
 
-- [] Come up with a working version
-- [] Implement basic unittests
+- [X] Come up with a working version
 - [X] Use mypy for static checking
+- [] Implement basic unittests

@@ -3,7 +3,7 @@ from lmendeley.GenericReference import GenericReference
 import os
 import sh
 import tempfile
-from typing import List
+from typing import List, Dict
 import urllib.request
 from copy import deepcopy
 
@@ -12,6 +12,7 @@ from .clogger import setup_logging
 
 logger = logging.getLogger(__file__)
 setup_logging(__file__)
+
 
 class CalibreReference(GenericReference):
     """Simple class to hold a Calibre document's reference data.
@@ -37,6 +38,26 @@ class CalibreReference(GenericReference):
         "title",
     ]  # type: List[str]
 
+    param_key_to_type = {
+        "author_sort": str,
+        "authors": str,
+        "comments": str,
+        "cover": str,
+        "identifiers": list,
+        "languages": str,
+        "pubdate": str,
+        "publisher": str,
+        "rating": int,
+        "series": str,
+        "series_index": str,
+        "size": str,
+        "sort": str,
+        "tags": list,
+        "timestamp": int,
+        "title": str,
+    }  # type: Dict[str, type]
+
+
     # TODO - use them
     custom_param_keys = [
         "isbn",
@@ -56,6 +77,14 @@ class CalibreReference(GenericReference):
     def __init__(self, *args, **kargs):
         GenericReference.__init__(self, *args, **kargs)
 
+        """Parameters of a Calibre Reference."""
+        self.params = {
+            key: CalibreReference.param_key_to_type[key]() \
+            for key in CalibreReference.param_keys
+        }  # Dict[str, Any]
+
+        self.params.update(kargs)
+
 
     def write_to_db(self, library_path: str) -> bool:
         """Write the current instance to the Calibre db.
@@ -71,6 +100,8 @@ class CalibreReference(GenericReference):
             """Interact with the calibre library"""
             args = list(deepcopy(calibre_db_args))
             args.append("--with-library={}".format(library_path))
+            if calibre_db_args[0] == "set_metadata":
+                print("args: ", args)
             return sh.calibredb(args)
 
 
@@ -99,11 +130,26 @@ class CalibreReference(GenericReference):
         args = []
         for key, val in self.params.items():
             if val:
-                args.extend(["--field", "{}:\"{}\"".format(key, val)])
+                if self.param_key_to_type[key] is str or \
+                        self.param_key_to_type[key] is int:
+                    field_val = val
+                elif self.param_key_to_type[key] is list:  # e.g. tags field
+                    if isinstance(val, list):
+                        val_tmp = val
+                    else:
+                        # account for single-element lists
+                        val_tmp = [val]
+
+                    field_val = ""
+                    for i in val_tmp:
+                        if i:
+                            field_val += "{},".format(i)
+                    field_val = field_val.rstrip(',')
+                else:
+                    raise RuntimeError("Unknown type: {}"
+                                       .format(self.param_key_to_type[key]))
+                args.extend(["--field", "{}:{}".format(key, field_val)])
 
         interact_with_lib("set_metadata", int(calibr_id), *args)
         return True
-
-
-        # TODO: Insert a book in calibre - how to manage the fields?
 

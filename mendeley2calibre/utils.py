@@ -37,8 +37,9 @@ def convert_mendeley_to_calibre_ref(mendeley_ref: MendeleyReference) \
 
     # comment
     # bundle abstract, notes, ... in the comments
-    calib_ref.params["comments"] = "{abstract}\n\n---\n\n".format(
-        abstract=mendeley_ref.params["abstract"])
+    if mendeley_ref.params["abstract"]:
+        calib_ref.params["comments"] = "{}\n\n---\n\n".format(
+            mendeley_ref.params["abstract"])
 
     # Add the rest of correspondences for which there is no Calibre field
     for prop_str in ["pages",
@@ -56,6 +57,8 @@ def convert_mendeley_to_calibre_ref(mendeley_ref: MendeleyReference) \
     # bundle isbn, doi to the identifiers
     calib_ref.params["identifiers"] = [mendeley_ref.params[i] for i in ["doi",
                                                                         "uuid"]]
+    calib_ref.params["identifiers"] = [i.strip('{}') for i in
+                                       calib_ref.params["identifiers"] if i]
 
     # favourite -> high rating
     if mendeley_ref.params["favourite"]:
