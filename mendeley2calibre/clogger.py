@@ -19,10 +19,10 @@ except ImportError:
 def setup_logging(logger_name):
     root = logging.getLogger(logger_name)
     root.setLevel(logging.DEBUG)
-    format = '%(name)s: %(asctime)s - %(levelname)-8s - %(message)s'
+    log_format = '%(name)s: %(asctime)s - %(levelname)-8s - %(message)s'
     date_format = '%Y-%m-%d %H:%M:%S'
     if 'colorlog' in sys.modules and os.isatty(2):
-        cformat = '%(log_color)s' + format
+        cformat = '%(log_color)s' + log_format
         f = colorlog.ColoredFormatter(cformat, date_format,
                                       log_colors={'DEBUG': 'cyan',
                                                   'INFO': 'green',
@@ -30,7 +30,7 @@ def setup_logging(logger_name):
                                                   'ERROR': 'bold_red',
                                                   'CRITICAL': 'bold_red'})
     else:
-        f = logging.Formatter(format, date_format)
+        f = logging.Formatter(log_format, date_format)
     ch = logging.StreamHandler()
     ch.setFormatter(f)
     root.addHandler(ch)

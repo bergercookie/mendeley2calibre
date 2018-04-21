@@ -60,6 +60,8 @@ A developer can also generate the `Sphinx` documentation for `mendeley2calibre` 
 - [X] Come up with a working version
 - [X] Use mypy for static checking
 - [X] Generate Sphinx documentation
+- [X] Authors, Document Tags Support
+- [ ] optional argument for specifying the mendeley path as well
 - [ ] Unittests
 - [ ] basic CI script that runs unittests, mypy
 - [ ] Code quality badge?
@@ -68,10 +70,6 @@ A developer can also generate the `Sphinx` documentation for `mendeley2calibre` 
   - [ ] CI
   - [ ] Version
   - [ ] Documentation
-- [ ] Rename package to something more generic mendeley_calibre_bridge
-- [ ] Implement authors read and write
-- [ ] Implement copying the mendeley tags
 - [ ] cleanup todos
-- [ ] optional argument for specifying the mendeley path as well
 - [ ] specify a stable commit in the mendeley2calibre setup.py file
 - [ ] Peek demo

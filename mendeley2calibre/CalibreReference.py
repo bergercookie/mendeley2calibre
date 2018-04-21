@@ -95,8 +95,6 @@ class CalibreReference(GenericReference):
             """Interact with the calibre library"""
             args = list(deepcopy(calibre_db_args))
             args.append("--with-library={}".format(library_path))
-            if calibre_db_args[0] == "set_metadata":
-                print("args: ", args)
             return sh.calibredb(args)
 
 
@@ -150,8 +148,8 @@ class CalibreReference(GenericReference):
         # Authors are set using the following syntax in calibredb
         # --field authors:"firstName1 last_name1 & first_name2 last_name2"
         if self.authors:
-            authors_tmp = "\"{}\"".format(" & ".join([" ".join(i)
-                                                    for i in self.authors]))
+            authors_tmp = "{}".format(" & ".join([" ".join(i)
+                                                      for i in self.authors]))
             args.extend(["--field", "authors:{}".format(authors_tmp)])
             args.extend(["--field", "author_sort:{}".format(authors_tmp)])
 
