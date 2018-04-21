@@ -23,7 +23,6 @@ package.
 ## Setup
 
 Install the package locally using pip:
-
   ```sh
   pip3 install --user --upgrade git+https://github.com/bergercookie/pymendeley
   ```
