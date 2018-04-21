@@ -15,7 +15,7 @@ def read(fname):
 
 
 setup(name=PKG_NAME,
-      version='0.1',
+      version='0.1.1',
       description='Conversion tool for migrating a Mendeley DB to calibre',
       long_description=read('README.md'),
       author=author,

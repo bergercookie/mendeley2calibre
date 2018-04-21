@@ -14,8 +14,6 @@
 
 ## Description
 
-**Current project is a work in progress. Do not expect it to work.**
-
 Conversion tool for migrating a Mendeley DB to calibre. mendeley2calibre parses
 the local mendeley sqlite3 db and imports the files + metadata found there to
 the corresponding Calibre db. Parsing of the mendeley db is carried out using
@@ -61,15 +59,16 @@ A developer can also generate the `Sphinx` documentation for `mendeley2calibre` 
 - [X] Use mypy for static checking
 - [X] Generate Sphinx documentation
 - [X] Authors, Document Tags Support
-- [ ] optional argument for specifying the mendeley path as well
+- [X] Optional argument for specifying the mendeley path as well
 - [ ] Unittests
-- [ ] basic CI script that runs unittests, mypy
+  - [ ] pymendeley
+  - [ ] calibre2mendeley
+- [ ] Basic CI script that runs unittests, mypy
 - [ ] Code quality badge?
 - [ ] Github badges (pymendeley, mendeley2calibre)
   - [ ] Code quality
   - [ ] CI
   - [ ] Version
   - [ ] Documentation
-- [ ] cleanup todos
-- [ ] specify a stable commit in the mendeley2calibre setup.py file
+- [ ] Cleanup Todos
 - [ ] Peek demo
