@@ -30,7 +30,6 @@ Install the package locally using pip:
 ## Usage
 
 Migrate the mendeley db using the mendeley2calibre script
-
   ```sh
   mendeley2calibre --help
   mendeley2calibre  # Run the script
