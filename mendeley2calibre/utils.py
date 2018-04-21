@@ -31,9 +31,7 @@ def convert_mendeley_to_calibre_ref(mendeley_ref: MendeleyReference) \
 
     # fill the corresponding fields
     calib_ref.doc_url = mendeley_ref.doc_url
-
-    # author_sort - authors
-    # TODO
+    calib_ref.authors = mendeley_ref.authors
 
     # comment
     # bundle abstract, notes, ... in the comments
@@ -70,7 +68,8 @@ def convert_mendeley_to_calibre_ref(mendeley_ref: MendeleyReference) \
 
     # TODO - copy the mendeley tags as well
     # add the rest of mendeley properties in the calibre "tags"
-    calib_ref.params["tags"] = mendeley_ref.params["type"]
+    calib_ref.params["tags"] = mendeley_ref.tags
+    calib_ref.params["tags"].append(mendeley_ref.params["type"])
 
     return calib_ref
 

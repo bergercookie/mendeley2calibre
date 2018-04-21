@@ -20,8 +20,6 @@ class CalibreReference(GenericReference):
 
     """Keys in a document that the CalibreReference instance cares about"""
     param_keys = [
-        "author_sort",
-        "authors",
         "comments",
         "cover",
         "identifiers",
@@ -39,8 +37,6 @@ class CalibreReference(GenericReference):
     ]  # type: List[str]
 
     param_key_to_type = {
-        "author_sort": str,
-        "authors": str,
         "comments": str,
         "cover": str,
         "identifiers": list,
@@ -81,10 +77,9 @@ class CalibreReference(GenericReference):
         self.params = {
             key: CalibreReference.param_key_to_type[key]() \
             for key in CalibreReference.param_keys
-        }  # Dict[str, Any]
+        }
 
         self.params.update(kargs)
-
 
     def write_to_db(self, library_path: str) -> bool:
         """Write the current instance to the Calibre db.
@@ -120,7 +115,8 @@ class CalibreReference(GenericReference):
                           "--title", self.params["title"])
 
         # deal with bug in cli parsing of calibre - escape parens
-        calibr_id = interact_with_lib("search", "title:\"{}\"".format(self.params["title"].replace('(', '\\(').replace(')', '\\)')))
+        calibr_id = interact_with_lib("search", "title:\"{}\""
+                                      .format(self.params["title"].replace('(', '\\(').replace(')', '\\)')))
 
 
         if not calibr_id:
@@ -149,6 +145,15 @@ class CalibreReference(GenericReference):
                     raise RuntimeError("Unknown type: {}"
                                        .format(self.param_key_to_type[key]))
                 args.extend(["--field", "{}:{}".format(key, field_val)])
+
+        # authors, authors_sort
+        # Authors are set using the following syntax in calibredb
+        # --field authors:"firstName1 last_name1 & first_name2 last_name2"
+        if self.authors:
+            authors_tmp = "\"{}\"".format(" & ".join([" ".join(i)
+                                                    for i in self.authors]))
+            args.extend(["--field", "authors:{}".format(authors_tmp)])
+            args.extend(["--field", "author_sort:{}".format(authors_tmp)])
 
         interact_with_lib("set_metadata", int(calibr_id), *args)
         return True

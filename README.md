@@ -39,8 +39,39 @@ Migrate the mendeley db using the mendeley2calibre script
     mendeley2calibre  # Run the script
     ```
 
+## Offline documentation
+
+A developer can also generate the `Sphinx` documentation for `mendeley2calibre` offline:
+
+- Install the related tools:
+
+    ```sh
+    apt-get install sphinx sphinx_rtd_theme
+    ```
+- To update the documentation run `make html` inside the `docs` directory.
+    Open the build/html/index.html file to view the results
+
+        #!sh
+        firefox docs/build/html/index.html
+
+
 ## Roadmap
 
 - [X] Come up with a working version
 - [X] Use mypy for static checking
-- [] Implement basic unittests
+- [X] Generate Sphinx documentation
+- [ ] Unittests
+- [ ] basic CI script that runs unittests, mypy
+- [ ] Code quality badge?
+- [ ] Github badges (pymendeley, mendeley2calibre)
+  - [ ] Code quality
+  - [ ] CI
+  - [ ] Version
+  - [ ] Documentation
+- [ ] Rename package to something more generic mendeley_calibre_bridge
+- [ ] Implement authors read and write
+- [ ] Implement copying the mendeley tags
+- [ ] cleanup todos
+- [ ] optional argument for specifying the mendeley path as well
+- [ ] specify a stable commit in the mendeley2calibre setup.py file
+- [ ] Peek demo

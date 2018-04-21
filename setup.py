@@ -25,7 +25,6 @@ setup(name=PKG_NAME,
       license='BSD 3-clause',
       install_requires=(
           "pymendeley",
-          "argparse",
           "sh",
           "click",
           "colorlog",
