@@ -24,18 +24,18 @@ package.
 
 Install the package locally using pip:
 
-    ```sh
-    pip3 install --user --upgrade git+https://github.com/bergercookie/pymendeley
-    ```
+  ```sh
+  pip3 install --user --upgrade git+https://github.com/bergercookie/pymendeley
+  ```
 
 ## Usage
 
 Migrate the mendeley db using the mendeley2calibre script
 
-    ```sh
-    mendeley2calibre --help
-    mendeley2calibre  # Run the script
-    ```
+  ```sh
+  mendeley2calibre --help
+  mendeley2calibre  # Run the script
+  ```
 
 ## Offline documentation
 
