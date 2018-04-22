@@ -1,13 +1,13 @@
 # mendeley2calibre
 <p align="center">
-  <a href="https://github.com/bergercookie/mendeley2calibre/blob/master/LICENSE" alt="License">
-  <img src="https://img.shields.io/pypi/l/Django.svg" /></a>
-
   <a href="https://travis-ci.org/bergercookie/mendeley2calibre" alt="Build Status">
-  <img src="https://travis-ci.org/bergercookie/mendeley2calibre?branch=master" /></a>
+  <img src="https://travis-ci.org/bergercookie/mendeley2calibre.svg?branch=master" /></a>
 
   <a href='http://mendeley2calibre.readthedocs.io/en/latest/?badge=latest'>
   <img src='https://readthedocs.org/projects/mendeley2calibre/badge/?version=latest' alt='Documentation Status' /></a>
+
+  <a href="https://github.com/bergercookie/mendeley2calibre/blob/master/LICENSE" alt="License">
+  <img src="https://img.shields.io/pypi/l/Django.svg" /></a>
 
   <a href="https://www.python.org/" alt="Python">
   <img src="https://img.shields.io/badge/Made%20with-Python-1f425f.svg" /></a>
@@ -40,6 +40,7 @@ package.
 Install the package locally using pip:
   ```sh
   pip3 install --user --upgrade git+https://github.com/bergercookie/pymendeley
+  pip3 install --user --upgrade git+https://github.com/bergercookie/mendeley2calibre
   ```
 
 ## Usage
@@ -47,7 +48,16 @@ Install the package locally using pip:
 Migrate the mendeley db using the mendeley2calibre script
   ```sh
   mendeley2calibre --help
-  mendeley2calibre  # Run the script
+
+  Usage: migrate_to_calibre.py [OPTIONS]
+
+  Options:
+    -c, --calibre-lib PATH   Top-level path to the Calibre library  [required]
+    -m, --mendeley-lib PATH  Path to the Mendeley sqlite3 DB. If not specified
+                             ./migrate_to_calibre.py will try to guess where
+                             that is.
+    --help                   Show this message and exit.
+
   ```
 
 ## Offline documentation
@@ -78,9 +88,9 @@ A developer can also generate the `Sphinx` documentation for `mendeley2calibre` 
   - [ ] pymendeley
   - [ ] calibre2mendeley
 - [ ] Basic CI script that runs unittests, flake stats + posting
-  - [ ] pylint badge - https://github.com/mperlet/pybadge
 - [ ] Github badges (pymendeley, mendeley2calibre)
-  - [ ] Code quality
+  - [X] pymendeley - pylint badge - https://github.com/mperlet/pybadge
+  - [ ] calibre2mendeley - pylint badge - https://github.com/mperlet/pybadge
   - [X] CI
   - [X] Documentation
 - [ ] Cleanup Todos

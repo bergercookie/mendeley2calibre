@@ -22,9 +22,9 @@ matrix:
     sudo: false
     python: 'nightly'
 before_install:
-  pip install lint
 install:
-  - pip install --process-dependency-links .
+  - pip install https://github.com/bergercookie/pymendeley/tarball/master
+  - pip install .
 script:
   - ./travis/check_style
   - ./travis/run_tests
