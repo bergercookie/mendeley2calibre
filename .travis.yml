@@ -1,0 +1,33 @@
+language: python
+matrix:
+  include:
+  - os: linux
+    dist: xenial
+    sudo: false
+    python: '3.3'
+  - os: linux
+    dist: xenial
+    sudo: false
+    python: '3.4'
+  - os: linux
+    dist: xenial
+    sudo: false
+    python: '3.5'
+  - os: linux
+    dist: xenial
+    sudo: false
+    python: '3.6'
+  - os: linux
+    dist: xenial
+    sudo: false
+    python: 'nightly'
+before_install:
+  pip install lint
+install:
+  - pip install .
+script:
+  - ./travis/check_style
+  - ./travis/run_tests
+# test
+
+# flake8
