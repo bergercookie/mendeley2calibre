@@ -45,7 +45,7 @@ A developer can also generate the `Sphinx` documentation for `mendeley2calibre` 
   apt-get install sphinx sphinx_rtd_theme
   ```
 - To update the documentation run `make html` inside the `docs` directory.
-    Open the build/html/index.html file to view the results
+    Open the `build/html/index.html` file to view the results
 
   ```sh
   firefox docs/build/html/index.html
@@ -63,7 +63,7 @@ A developer can also generate the `Sphinx` documentation for `mendeley2calibre` 
   - [ ] pymendeley
   - [ ] calibre2mendeley
 - [ ] Basic CI script that runs unittests, mypy
-- [ ] Code quality badge?
+  - [ ] pylint badge - https://github.com/mperlet/pybadge
 - [ ] Github badges (pymendeley, mendeley2calibre)
   - [ ] Code quality
   - [ ] CI
