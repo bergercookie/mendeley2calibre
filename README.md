@@ -1,4 +1,19 @@
 # mendeley2calibre
+<p align="center">
+  <a href="https://github.com/bergercookie/mendeley2calibre/blob/master/LICENSE" alt="License">
+  <img src="https://img.shields.io/pypi/l/Django.svg" /></a>
+
+  <a href="https://travis-ci.org/bergercookie/mendeley2calibre" alt="Build Status">
+  <img src="https://travis-ci.org/bergercookie/mendeley2calibre?branch=master" /></a>
+
+  <a href='http://mendeley2calibre.readthedocs.io/en/latest/?badge=latest'>
+  <img src='https://readthedocs.org/projects/mendeley2calibre/badge/?version=latest' alt='Documentation Status' /></a>
+
+  <a href="https://www.python.org/" alt="Python">
+  <img src="https://img.shields.io/badge/Made%20with-Python-1f425f.svg" /></a>
+
+</p>
+
 
 ```
                               _        _               ___              _  _  _
@@ -62,12 +77,10 @@ A developer can also generate the `Sphinx` documentation for `mendeley2calibre` 
 - [ ] Unittests
   - [ ] pymendeley
   - [ ] calibre2mendeley
-- [ ] Basic CI script that runs unittests, mypy
+- [ ] Basic CI script that runs unittests, flake stats + posting
   - [ ] pylint badge - https://github.com/mperlet/pybadge
 - [ ] Github badges (pymendeley, mendeley2calibre)
   - [ ] Code quality
-  - [ ] CI
-  - [ ] Version
-  - [ ] Documentation
+  - [X] CI
+  - [X] Documentation
 - [ ] Cleanup Todos
-- [ ] Peek demo
