@@ -113,8 +113,16 @@ class CalibreReference(GenericReference):
                           "--title", self.params["title"])
 
         # deal with bug in cli parsing of calibre - escape parens
+        formatted_title = self.params["title"]
+        # specifically escape these characters, calibredb can't handle them
+        escape_chars = "()\""
+        for ch in escape_chars:
+            formatted_title = formatted_title.replace(ch, "\{}".format(ch))
         calibr_id = interact_with_lib("search", "title:\"{}\""
-                                      .format(self.params["title"].replace('(', '\\(').replace(')', '\\)')))
+                                      .format(formatted_title))
+
+        # take the first element in case there are many
+        calibr_id = calibr_id.split(',')[0]
 
 
         if not calibr_id:
